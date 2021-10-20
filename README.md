@@ -1,2 +1,7 @@
 # brainstorming-backend-node
-Backend em node da aplicação Brainstorming.
+
+Backend da aplicação Brainstorming em node.
+
+### Licenças
+
+Brainstorming está sobre a Licença [MIT](LICENSE)
