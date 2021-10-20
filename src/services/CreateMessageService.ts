@@ -1,3 +1,4 @@
+import { io } from "../app";
 import prismaClient from "../prisma";
 
 class CreateMessageService {
@@ -9,6 +10,18 @@ class CreateMessageService {
       },
       include: { user: true },
     });
+
+    const infoWS = {
+      text: message.text,
+      user_id: message.user.id,
+      created_at: message.created_at,
+      user: {
+        name: message.user.name,
+        avatar_url: message.user.avatar_url,
+      }
+    }
+
+    io.emit("new-message", infoWS);
 
     return message;
   }
