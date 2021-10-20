@@ -12,7 +12,7 @@ class AuthenticateUserController {
 
       return res.json(result);
     } catch (error) {
-        return res.json({error: error.message});
+      return res.json({ error: error.message });
     }
   }
 }
