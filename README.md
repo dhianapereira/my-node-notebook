@@ -38,4 +38,4 @@ Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 ---
 
-Esta é uma versão desenvolvida por mim do projeto na NLW Heat na trilha de Node.
+Esta é uma versão desenvolvida por mim do projeto da NLW Heat na trilha de Node.
