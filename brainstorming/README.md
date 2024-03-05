@@ -48,3 +48,100 @@ Crie uma cópia do arquivo [`.env.example`](./.env.example) na raiz do projeto c
 ```bash
 npm run dev
 ```
+
+## Documentação das Rotas
+
+### 1. Autenticação
+Para a requisição é necessário acessar http://localhost/github e copiar o código que será retornado.
+
+**Rota:**
+```bash
+http://localhost:4000/authenticate #Requisição do tipo POST
+```
+
+**Corpo da requisição:**
+```JSON
+{
+	"code": "Adicionar o código aqui"
+}
+```
+
+**Resposta:**
+```JSON
+{
+	"token": "Token de acesso que será utilizado nas demais requisições",
+	"user": {
+		"id": "ID do usuário",
+		"name": "Node do usuário",
+		"github_id": "ID do github",
+		"avatar_url": "URL da imagem de perfil do usuário",
+		"login": "Username do usuário"
+	}
+}
+```
+
+### 2. Recuperar dados do usuário
+Para realizar essa operação é necessário que o usuário esteja autenticado, ou seja, **é necessário o Bearer Token no header da requisição**.
+
+**Rota:**
+```bash
+http://localhost:4000/profile #Requisição do tipo GET
+```
+
+**Resposta:**
+```JSON
+{
+	"id": "ID do usuário",
+	"name": "Node do usuário",
+	"github_id": "ID do github",
+	"avatar_url": "URL da imagem de perfil do usuário",
+	"login": "Username do usuário"
+}
+```
+
+### 3. Adicionar uma nova mensagem
+Para realizar essa operação é necessário que o usuário esteja autenticado, ou seja, **é necessário o Bearer Token no header da requisição**.
+
+**Rota:**
+```bash
+http://localhost:4000/messages #Requisição do tipo POST
+```
+
+**Corpo da requisição:**
+```JSON
+{
+	"message": "Adicionar a mensagem aqui"
+}
+```
+
+**Resposta:**
+```JSON
+{
+	"id": "ID da mensagem",
+	"text": "Olá, como vai?",
+	"created_at": "Data de criação",
+	"user_id": "ID do usuário",
+	"user": {} //Dados do usuário que adicionou a mensagem
+}
+```
+
+### 4. Recuperar as 3 últimas mensagens
+Para realizar essa operação NÃO é necessário que o usuário esteja autenticado.
+
+**Rota:**
+```bash
+http://localhost:4000/messages/last3 #Requisição do tipo GET
+```
+
+**Resposta:**
+```JSON
+[
+    {
+        "id": "ID da mensagem",
+        "text": "Olá, como vai?",
+        "created_at": "Data de criação",
+        "user_id": "ID do usuário",
+        "user": {} //Dados do usuário que adicionou a mensagem
+    },
+]
+```
