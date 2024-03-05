@@ -1,41 +1,50 @@
-<h1 align="center">brainstorming-backend-node</h1>
+# Brainstorming
+Brainstorming é apenas um nome de uma aplicação que desenvolvi nas aulas do NLW Heat.
 
-<p align="center">
-  <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-como-executar">Como executar</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-licença">Licença</a>
-</p>
+## Ambiente de Desenvolvimento
+Para evitar problemas é legal que seu ambiente de desenvolvimento esteja com
+as seguintes versões:
 
-<p align="center">
-  <img alt="License" src="https://img.shields.io/static/v1?label=license&message=MIT&color=8257E5&labelColor=000000">
-</p>
+| Ferramenta | Versão         |
+| ---------- | -------------- |
+| Git        | A mais recente |
+| NodeJS     | v18.17.1       |
 
-## ✨ Tecnologias
+## Guia de Instalação
+> Com as ferramentas devidamente instaladas, execute os comandos abaixo
 
-Esse projeto foi desenvolvido com as seguintes tecnologias:
+### **1. Clonar repositório**
+```bash
+git clone https://github.com/dhianapereira/my-node-notebook.git
+```
 
-- [TypeScript](https://www.typescriptlang.org/)
-- [Express](https://expressjs.com/pt-br/)
-- [Prisma](https://www.prisma.io/)
-- [JSON Web Token](https://jwt.io/)
-- [Socket.IO](https://socket.io/)
+### **2. Entrar na pasta do projeto**
+```bash
+cd my-node-notebook/brainstorming
+```
 
-## 🚀 Como executar
+### **3. Instalar as dependências**
+```bash
+npm install
+```
 
-> Obs.: Nesse projeto temos autenticação via OAuth com o GitHub
+### **4. Criar arquivo de variáveis de ambiente**
+Crie uma cópia do arquivo [`.env.example`](./.env.example) na raiz do projeto com o nome `.env` e preencha com os devidos valores.
 
-- Clone o repositório e acesse a pasta;
-- Faça uma copia do arquivo `.env.example` para `.env` e preencha com as suas credenciais do GitHub;
-- Instale as dependências com `yarn`;
-- Executa as migrations com `yarn prisma migrate dev`;
-- Inicie o servidor com `yarn dev`;
+#### Para gerar as credenciais, siga esse passo a passo:
 
-A aplicação pode ser acessada em [`localhost:4000`](http://localhost:4000).
+1. Acesse a página de OAuthApps da sua conta do Github [aqui](https://github.com/settings/developers) e crie um novo app.
 
-## 📄 Licença
+2. Preencha os campos obrigatórios para a criação de uma nova aplicação. Nos campos `Homepage URL` e `Authorization callback URL` adicione os seguintes valores:
 
-Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+| Campo                      | Valor                                 |
+| -------------------------- | ------------------------------------- |
+| Homepage URL               | http://localhost:4000                 |
+| Authorization callback URL | http://localhost:4000/signin/callback |
 
----
+3. Após a criação do novo app, basta copiar o `Client ID` disponível e gerar uma `Client Secret`.
 
-Esta é uma versão desenvolvida por mim do projeto da NLW Heat na trilha de Node.
+### **5. Executar a aplicação**
+```bash
+npm run dev
+```
