@@ -1,19 +1,19 @@
 import {fastify} from 'fastify'
-import { DatabaseMemory } from './database-memory.js'
+import { DatabasePostgres } from './database-postgres.js'
 
 const server = fastify()
 
-const database = new DatabaseMemory()
+const database = new DatabasePostgres()
 
-server.get('/videos', (request)=>{
+server.get('/videos', async (request)=>{
     const search = request.query.search
-    const videos = database.list(search)
+    const videos = await database.list(search)
     return videos
 })
 
-server.post('/videos', (request, response)=>{
+server.post('/videos', async (request, response)=>{
     const {title, description, duration} = request.body
-    database.create({
+    await database.create({
         title,
         description,
         duration,
@@ -21,10 +21,10 @@ server.post('/videos', (request, response)=>{
     return response.status(201).send()
 })
 
-server.put('/videos/:id', (request, response)=>{
+server.put('/videos/:id', async (request, response)=>{
     const id = request.params.id
     const {title, description, duration} = request.body
-    database.update(id, {
+    await database.update(id, {
         title,
         description,
         duration,
@@ -32,12 +32,12 @@ server.put('/videos/:id', (request, response)=>{
     return response.status(204).send()
 })
 
-server.delete('/videos/:id', (request, response)=>{
+server.delete('/videos/:id', async (request, response)=>{
     const id = request.params.id
-    database.delete(id)
+    await database.delete(id)
     return response.status(204).send()
 })
 
 server.listen({
-    port: 3333,
+    port: process.env.PORT ?? 3333,
 })

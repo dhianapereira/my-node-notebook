@@ -2,7 +2,7 @@ POST http://localhost:3333/videos
 Content-Type: application/json
 
 {
-    "title": "Video",
+    "title": "First Video",
     "description": "This is the first video.",
     "duration": 180
 }
