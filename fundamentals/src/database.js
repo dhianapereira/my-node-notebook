@@ -19,13 +19,22 @@ export class Database {
     fs.writeFile(databasePath, JSON.stringify(this.#database))
   }
 
-  select(table, search) {
+  select(table, search, id) {
     let data = this.#database[table] ?? []
+
+    if (id) {
+      const element = data.find(row => row.id === id) || null
+      if (!element) {
+        throw Error(`The element does not exist`)
+      }
+
+      return element
+    }
 
     if (search) {
       data = data.filter(row => {
         return Object.entries(search).some(([key, value]) => {
-          return row[key].toLowerCase().includes(value.toLowerCase())
+          return row[key] && row[key].toLowerCase().includes(value.toLowerCase())
         })
       })
     }
@@ -48,16 +57,19 @@ export class Database {
   update(table, id, data) {
     this.#checkTable(table)
     const rowIndex = this.#database[table].findIndex(row => row.id === id)
-
-    if (rowIndex > -1) {
-      this.#database[table][rowIndex] = { id, ...data }
-      this.#persist()
+    if (rowIndex == -1) {
+      throw Error(`The ${id} does not exist in the database.`)
     }
+
+    this.#database[table][rowIndex] = {
+      ...this.#database[table][rowIndex],
+      ...data
+    }
+    this.#persist()
   }
 
   delete(table, id) {
     this.#checkTable(table)
-
     const rowIndex = this.#database[table].findIndex(row => row.id === id)
     if (rowIndex == -1) {
       throw Error(`The ${id} does not exist in the database.`)
