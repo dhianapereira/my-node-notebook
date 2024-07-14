@@ -4,3 +4,4 @@ Este repositório contém todos os meus projetos node que eu desenvolvi pelas au
 
 - [Brainstorming](./brainstorming/)
 - [Http Server](./http_server/)
+- [fundamentals](./fundamentals/)
