@@ -6,5 +6,9 @@
   "scripts": {
     "dev": "node --watch src/server.js"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "csv-parse": "^5.5.6",
+    "node-fetch": "^3.3.2"
+  }
 }
