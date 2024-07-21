@@ -11,6 +11,11 @@ export async function usersRoutes(app: FastifyInstance) {
     })
     const { name, username } = createUserBodySchema.parse(request.body)
 
+    const userExists = await knex('users').where({ username }).first()
+    if (userExists) {
+      return reply.status(400).send({ message: 'User already exists' })
+    }
+
     let sessionId = request.cookies.sessionId
     if (!sessionId) {
       sessionId = crypto.randomUUID()
@@ -19,11 +24,6 @@ export async function usersRoutes(app: FastifyInstance) {
         path: '/',
         maxAge: 60 * 60 * 24 * 7, // 7 days
       })
-    }
-
-    const userExists = await knex('users').where({ username }).first()
-    if (userExists) {
-      return reply.status(400).send({ message: 'User already exists' })
     }
 
     await knex('users').insert({
