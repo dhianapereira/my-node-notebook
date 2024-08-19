@@ -3,7 +3,7 @@ import { RegisterUserUseCase } from '../register-user'
 
 export function makeRegisterUserUseCase() {
   const userRepository = new PrismaUserRepository()
-  const registerUserUseCase = new RegisterUserUseCase(userRepository)
+  const useCase = new RegisterUserUseCase(userRepository)
 
-  return registerUserUseCase
+  return useCase
 }
